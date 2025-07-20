@@ -56,7 +56,7 @@ const InteractiveSkills: React.FC = () => {
         { name: "Laravel", level: 90, icon: Zap, description: "Framework mastery" },
         { name: "MySQL", level: 85, icon: Database, description: "Database design" },
         { name: "API Development", level: 88, icon: GitBranch, description: "RESTful services" },
-        { name: "Redis", level: 80, icon: Database, description: "Caching solutions" }
+        { name: "Python", level: 85, icon: Code, description: "Scripting & automation" }
       ]
     },
     {
@@ -78,10 +78,10 @@ const InteractiveSkills: React.FC = () => {
       <div className="container mx-auto">
         <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="text-center mb-16">
-            <h2 className="text-6xl font-extrabold bg-gradient-to-r from-blue-400 via-purple-500 to-pink-400 bg-clip-text text-transparent mb-4">
+            <h2 className="text-6xl font-extrabold bg-gradient-to-r from-blue-400 via-purple-500 to-pink-400 bg-clip-text text-transparent mb-4 animate-letter-spacing">
               Technical Arsenal
             </h2>
-            <p className="text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+            <p className="text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto animate-text-focus animate-delay-300">
               Cutting-edge technologies and tools that power modern digital infrastructure
             </p>
           </div>

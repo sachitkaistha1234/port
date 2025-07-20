@@ -146,30 +146,30 @@ const Hero: React.FC = () => {
           {/* Text Content */}
           <div className="space-y-6 relative z-20">
             <div className="h-24">
-              <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-400 via-purple-500 to-pink-400 bg-clip-text text-transparent animate-gradient-move">
+              <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-400 via-purple-500 to-pink-400 bg-clip-text text-transparent animate-gradient-move animate-text-focus">
                 {displayText}
                 <span className="animate-pulse">|</span>
               </h1>
             </div>
-            <div className="p-1 rounded-2xl animated-border-glass bg-white/30 dark:bg-slate-800/30 shadow-xl backdrop-blur-md border border-white/30 dark:border-slate-700/30">
-              <p className="text-lg text-slate-600 dark:text-slate-300 max-w-lg px-6 py-4">
+            <div className="p-1 rounded-2xl animated-border-glass bg-white/30 dark:bg-slate-800/30 shadow-xl backdrop-blur-md border border-white/30 dark:border-slate-700/30 animate-slide-in-bottom animate-delay-300">
+              <p className="text-lg text-slate-600 dark:text-slate-300 max-w-lg px-6 py-4 animate-text-reveal animate-delay-500">
                 Building scalable systems & automating the future. Passionate DevOps Engineer with a strong background in PHP development.
               </p>
             </div>
-            <p className="italic text-blue-500 dark:text-blue-300 text-base min-h-[2.5rem]">
+            <p className="italic text-blue-500 dark:text-blue-300 text-base min-h-[2.5rem] animate-glow-text animate-delay-700">
               {taglineText}
               <span className="animate-pulse">|</span>
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 animate-slide-in-left animate-delay-800">
               <HireButton />
-              <button onClick={handleResumeClick} className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25">
+              <button onClick={handleResumeClick} className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25 animate-scale-in animate-delay-400">
                 <span className="flex items-center gap-2">
                   <Download className="w-5 h-5" />
                   Download Resume
                 </span>
                 <div className="absolute inset-0 bg-white/20 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300"></div>
               </button>
-              <div className="flex gap-4">
+              <div className="flex gap-4 animate-scale-in animate-delay-600">
                 <a href="https://github.com/sachitkaistha" target="_blank" rel="noopener noreferrer" className="p-3 bg-gradient-to-br from-white/30 to-blue-100 dark:from-slate-800/50 dark:to-blue-900 rounded-lg hover:bg-white/40 dark:hover:bg-slate-700 transition-all duration-300 hover:scale-110 shadow-md relative group animated-social" title="GitHub">
                   <Github className="w-5 h-5 text-slate-600 dark:text-slate-300" />
                   <span className="absolute left-1/2 -bottom-8 -translate-x-1/2 opacity-0 group-hover:opacity-100 bg-slate-800 text-white text-xs rounded px-2 py-1 pointer-events-none transition-all">GitHub</span>

@@ -68,7 +68,7 @@ const Certifications: React.FC = () => {
         <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="flex items-center justify-center gap-4 mb-10">
             <Award className="w-10 h-10 text-cyan-400" />
-            <h2 className="text-5xl font-extrabold text-center bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent animate-gradient-move">
+            <h2 className="text-5xl font-extrabold text-center bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent animate-gradient-move animate-letter-spacing">
               Certifications & Training
             </h2>
           </div>

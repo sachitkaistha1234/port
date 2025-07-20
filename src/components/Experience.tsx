@@ -79,7 +79,7 @@ const Experience: React.FC = () => {
         <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="flex items-center justify-center gap-4 mb-10">
             <Briefcase className="w-10 h-10 text-amber-400" />
-            <h2 className="text-5xl font-extrabold text-center bg-gradient-to-r from-amber-400 via-pink-400 to-amber-400 bg-clip-text text-transparent animate-gradient-move">
+            <h2 className="text-5xl font-extrabold text-center bg-gradient-to-r from-amber-400 via-pink-400 to-amber-400 bg-clip-text text-transparent animate-gradient-move animate-letter-spacing">
               Professional Experience
             </h2>
           </div>

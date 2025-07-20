@@ -134,10 +134,10 @@ const About: React.FC = () => {
         <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           {/* Section Header */}
           <div className="text-center mb-16">
-            <h2 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-400 bg-clip-text text-transparent animate-gradient-move">
+            <h2 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-400 bg-clip-text text-transparent animate-gradient-move animate-letter-spacing">
               About Me
             </h2>
-            <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed animate-text-focus animate-delay-300">
               Passionate DevOps Engineer with a mission to bridge development and operations through innovative automation and scalable solutions.
             </p>
           </div>
@@ -150,11 +150,9 @@ const About: React.FC = () => {
                 <div className="relative mb-8 group">
                   <div className="w-48 h-48 mx-auto rounded-3xl bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 p-1 shadow-2xl">
                     <div className="w-full h-full rounded-3xl overflow-hidden">
-                     <img 
-                        src="/1713446390783 (1).jpeg" 
-                        alt="Sachit - DevOps Engineer" 
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                      />
+                      <div className="w-full h-full bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 rounded-3xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                        <div className="text-6xl font-bold text-white">S</div>
+                      </div>
                     </div>
                   </div>
                   {/* Status Indicator */}
@@ -240,32 +238,32 @@ const About: React.FC = () => {
                   {/* My Story Tab */}
                   {activeTab === 'story' && (
                     <div className="space-y-6 animate-fade-in">
-                      <h3 className="text-3xl font-bold text-slate-800 dark:text-white mb-6">
+                      <h3 className="text-3xl font-bold text-slate-800 dark:text-white mb-6 animate-word-slide">
                         My Journey in Tech
                       </h3>
                       
                       <div className="space-y-6 text-lg text-slate-700 dark:text-slate-200 leading-relaxed">
-                        <p>
+                        <p className="animate-text-reveal animate-delay-200">
                           My journey began with a <span className="text-blue-500 font-semibold">curiosity for code</span> and 
                           evolved into a passion for building systems that scale. Starting as a PHP developer, I spent 2.7 years 
                           crafting robust web applications, mastering the art of clean, efficient code, and understanding the 
                           intricacies of backend development.
                         </p>
                         
-                        <p>
+                        <p className="animate-text-reveal animate-delay-400">
                           The transition to <span className="text-purple-500 font-semibold">DevOps</span> felt like a natural 
                           evolution. I realized that great software isn't just about writing code—it\'s about creating systems 
                           that are reliable, scalable, and maintainable. This led me to dive deep into containerization, 
                           CI/CD pipelines, and cloud infrastructure.
                         </p>
                         
-                        <p>
+                        <p className="animate-text-reveal animate-delay-600">
                           Today, I'm driven by the challenge of <span className="text-emerald-500 font-semibold">bridging the gap</span> between 
                           development and operations. Every automation script I write, every pipeline I optimize, and every 
                           infrastructure I design is aimed at empowering teams to ship faster, more reliably, and with confidence.
                         </p>
                         
-                        <blockquote className="border-l-4 border-blue-500 pl-6 italic text-xl text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 p-4 rounded-r-lg">
+                        <blockquote className="border-l-4 border-blue-500 pl-6 italic text-xl text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 p-4 rounded-r-lg animate-glow-text animate-delay-800">
                           "The best DevOps engineers don't just automate processes—they automate success."
                         </blockquote>
                       </div>
@@ -275,7 +273,7 @@ const About: React.FC = () => {
                   {/* Core Values Tab */}
                   {activeTab === 'values' && (
                     <div className="animate-fade-in">
-                      <h3 className="text-3xl font-bold text-slate-800 dark:text-white mb-6">
+                      <h3 className="text-3xl font-bold text-slate-800 dark:text-white mb-6 animate-word-slide">
                         What Drives My Work
                       </h3>
                       
@@ -285,17 +283,18 @@ const About: React.FC = () => {
                           return (
                             <div
                               key={index}
-                              className="p-6 bg-white/50 dark:bg-slate-800/50 rounded-2xl hover:scale-105 transition-all duration-300 group"
+                              className="p-6 bg-white/50 dark:bg-slate-800/50 rounded-2xl hover:scale-105 transition-all duration-300 group animate-scale-in"
+                              style={{ animationDelay: `${index * 150}ms` }}
                             >
                               <div className="flex items-center gap-4 mb-4">
                                 <div className="p-3 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl group-hover:scale-110 transition-transform duration-300">
                                   <IconComponent className="w-6 h-6 text-white" />
                                 </div>
-                                <h4 className="text-xl font-bold text-slate-800 dark:text-white">
+                                <h4 className="text-xl font-bold text-slate-800 dark:text-white animate-text-focus">
                                   {value.title}
                                 </h4>
                               </div>
-                              <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
+                              <p className="text-slate-600 dark:text-slate-300 leading-relaxed animate-text-reveal animate-delay-200">
                                 {value.description}
                               </p>
                             </div>
@@ -308,7 +307,7 @@ const About: React.FC = () => {
                   {/* What Sets Me Apart Tab */}
                   {activeTab === 'unique' && (
                     <div className="animate-fade-in">
-                      <h3 className="text-3xl font-bold text-slate-800 dark:text-white mb-6">
+                      <h3 className="text-3xl font-bold text-slate-800 dark:text-white mb-6 animate-word-slide">
                         My Unique Strengths
                       </h3>
                       
@@ -318,16 +317,17 @@ const About: React.FC = () => {
                           return (
                             <div
                               key={index}
-                              className="flex items-start gap-6 p-6 bg-white/50 dark:bg-slate-800/50 rounded-2xl hover:scale-105 transition-all duration-300 group"
+                              className="flex items-start gap-6 p-6 bg-white/50 dark:bg-slate-800/50 rounded-2xl hover:scale-105 transition-all duration-300 group animate-slide-in-left"
+                              style={{ animationDelay: `${index * 200}ms` }}
                             >
                               <div className={`p-4 rounded-2xl bg-gradient-to-br ${quality.color} group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
                                 <IconComponent className="w-8 h-8 text-white" />
                               </div>
                               <div className="flex-1">
-                                <h4 className="text-xl font-bold text-slate-800 dark:text-white mb-3">
+                                <h4 className="text-xl font-bold text-slate-800 dark:text-white mb-3 animate-text-focus">
                                   {quality.title}
                                 </h4>
-                                <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
+                                <p className="text-slate-600 dark:text-slate-300 leading-relaxed animate-text-reveal animate-delay-300">
                                   {quality.description}
                                 </p>
                               </div>
