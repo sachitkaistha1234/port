@@ -17,6 +17,7 @@ import {
   Shield,
   Rocket
 } from 'lucide-react';
+import { generateResumePDF } from '../utils/resumeGenerator';
 
 const About: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -104,11 +105,8 @@ const About: React.FC = () => {
   ];
 
   const handleDownloadResume = () => {
-    // Create a temporary download link for resume
-    const link = document.createElement('a');
-    link.href = '#'; // Replace with actual resume URL when available
-    link.download = 'Sachit_Kaistha_Resume.pdf';
-    link.click();
+    // Generate and download PDF resume
+    generateResumePDF();
   };
 
   const scrollToContact = () => {

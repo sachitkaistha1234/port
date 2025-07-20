@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Download, Github, Linkedin, Mail, ChevronDown, Mail as MailIcon } from 'lucide-react';
 import AnimatedAvatar from './AnimatedAvatar';
 import HireButton from './HireButton';
+import { generateResumePDF } from '../utils/resumeGenerator';
 
 const taglines = [
   'Building bridges between code and cloud.',
@@ -105,11 +106,8 @@ const Hero: React.FC = () => {
     setShowConfetti(true);
     setTimeout(() => setShowConfetti(false), 1200);
     
-    // Create a temporary download link for resume
-    const link = document.createElement('a');
-    link.href = '#'; // Replace with actual resume URL when available
-    link.download = 'Sachit_Kaistha_Resume.pdf';
-    link.click();
+    // Generate and download PDF resume
+    generateResumePDF();
   };
 
   return (

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Home, User, Code, GraduationCap, Briefcase, Award, FolderOpen, MessageCircle, Sun, Moon, Zap, Download } from 'lucide-react';
 import { useTheme } from '../hooks/useTheme';
+import { generateResumePDF } from '../utils/resumeGenerator';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -63,11 +64,8 @@ const Navbar: React.FC = () => {
   };
 
   const handleResumeDownload = () => {
-    // Create a temporary download link for resume
-    const link = document.createElement('a');
-    link.href = '#'; // Replace with actual resume URL when available
-    link.download = 'Sachit_Resume.pdf';
-    link.click();
+    // Generate and download PDF resume
+    generateResumePDF();
   };
 
   return (
