@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, Github, Linkedin, ExternalLink, MessageCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Github, Linkedin, ExternalLink, MessageCircle, CheckCircle, AlertCircle } from 'lucide-react';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +10,7 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -22,20 +23,54 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitStatus('success');
-      setFormData({ name: '', email: '', subject: '', message: '' });
+    setErrorMessage('');
+
+    try {
+      // Create FormData for Netlify Forms
+      const formDataToSend = new FormData();
+      formDataToSend.append('form-name', 'contact');
+      formDataToSend.append('name', formData.name);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('subject', formData.subject);
+      formDataToSend.append('message', formData.message);
+
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formDataToSend as any).toString()
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        
+        // Reset status after 5 seconds
+        setTimeout(() => setSubmitStatus('idle'), 5000);
+      } else {
+        throw new Error('Failed to send message');
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+      setSubmitStatus('error');
+      setErrorMessage('Failed to send message. Please try the email link below or try again later.');
       
-      // Reset status after 3 seconds
-      setTimeout(() => setSubmitStatus('idle'), 3000);
-    }, 1000);
+      // Reset error status after 5 seconds
+      setTimeout(() => setSubmitStatus('idle'), 5000);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleEmailMe = () => {
-    window.open('mailto:skaistha16@gmail.com', '_blank');
+    const subject = encodeURIComponent('Portfolio Contact - Let\'s Connect!');
+    const body = encodeURIComponent(`Hi Sachit,
+
+I found your portfolio and would like to connect with you.
+
+Best regards,
+[Your Name]`);
+    
+    window.open(`mailto:skaistha16@gmail.com?subject=${subject}&body=${body}`, '_blank');
   };
 
   return (
@@ -118,7 +153,7 @@ const Contact = () => {
                 className="w-full mt-8 flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-2xl hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl group font-semibold text-lg"
               >
                 <Mail className="w-6 h-6 group-hover:animate-bounce" />
-                <span>Email Me</span>
+                <span>Email Me Directly</span>
                 <ExternalLink className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
               </button>
             </div>
@@ -157,11 +192,22 @@ const Contact = () => {
               Send Message
             </h3>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form 
+              name="contact" 
+              method="POST" 
+              data-netlify="true" 
+              data-netlify-honeypot="bot-field"
+              onSubmit={handleSubmit} 
+              className="space-y-6"
+            >
+              {/* Hidden fields for Netlify */}
+              <input type="hidden" name="form-name" value="contact" />
+              <input type="hidden" name="bot-field" />
+
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-3">
-                    Name
+                    Name *
                   </label>
                   <input
                     type="text"
@@ -176,7 +222,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-3">
-                    Email
+                    Email *
                   </label>
                   <input
                     type="email"
@@ -193,7 +239,7 @@ const Contact = () => {
 
               <div>
                 <label htmlFor="subject" className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-3">
-                  Subject
+                  Subject *
                 </label>
                 <input
                   type="text"
@@ -209,7 +255,7 @@ const Contact = () => {
 
               <div>
                 <label htmlFor="message" className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-3">
-                  Message
+                  Message *
                 </label>
                 <textarea
                   id="message"
@@ -226,7 +272,7 @@ const Contact = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-4 px-8 rounded-xl font-semibold text-lg hover:shadow-lg hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-3 shadow-lg"
+                className="w-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-4 px-8 rounded-xl font-semibold text-lg hover:shadow-lg hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center space-x-3 shadow-lg"
               >
                 {isSubmitting ? (
                   <>
@@ -241,11 +287,34 @@ const Contact = () => {
                 )}
               </button>
 
+              {/* Status Messages */}
               {submitStatus === 'success' && (
-                <div className="p-4 bg-green-100 dark:bg-green-900/30 border border-green-200 dark:border-green-800 rounded-xl text-green-800 dark:text-green-200 text-center font-medium">
-                  ✅ Message sent successfully! I'll get back to you soon.
+                <div className="p-4 bg-green-100 dark:bg-green-900/30 border border-green-200 dark:border-green-800 rounded-xl text-green-800 dark:text-green-200 text-center font-medium flex items-center justify-center gap-2">
+                  <CheckCircle className="w-5 h-5" />
+                  <span>Message sent successfully! I'll get back to you soon.</span>
                 </div>
               )}
+
+              {submitStatus === 'error' && (
+                <div className="p-4 bg-red-100 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-xl text-red-800 dark:text-red-200 text-center font-medium flex items-center justify-center gap-2">
+                  <AlertCircle className="w-5 h-5" />
+                  <span>{errorMessage}</span>
+                </div>
+              )}
+
+              {/* Alternative Contact Note */}
+              <div className="text-center text-sm text-slate-500 dark:text-slate-400">
+                <p>
+                  Having trouble with the form? 
+                  <button 
+                    type="button"
+                    onClick={handleEmailMe}
+                    className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 font-medium ml-1 underline"
+                  >
+                    Email me directly
+                  </button>
+                </p>
+              </div>
             </form>
           </div>
         </div>
